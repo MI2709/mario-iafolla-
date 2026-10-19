@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="author" content="Mario Iafolla">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Mario Iafolla</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Mario Iafolla construit avec l'IA des outils que les équipes utilisent vraiment : cartographie des flux, IA en entreprise, Foyer, Le Carnet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap">
+<style>
+/* Layout: light product showcase. Floating device frames in the hero; one rounded, softly tinted card per project
+   (text left, framed screenshots right); short copy with details tucked into "En savoir plus". Light-only by design. */
+:root{
+  color-scheme:light;
+  --bg:#FFFFFF; --ink:#13202A; --body:#3C4952; --muted:#6B7780; --line:#E6EAED;
+  --accent:#EF7D12; --accent-soft:#FFF1E3; --go:#14915F; --go-soft:#E3F5EC;
+  --t-blue:#EEF3F9; --t-orange:#FFF4E8; --t-mint:#EAF6F0; --t-coral:#FDF0EB;
+  --shadow:0 30px 60px -28px rgba(19,32,42,.28), 0 8px 20px -12px rgba(19,32,42,.12);
+  --f:"Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --r-lg:32px; --r-md:20px;
+}
+body{background:var(--bg);color:var(--body);font:400 17px/1.65 var(--f);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body[data-lang="en"] .fr, body[data-lang="es"] .fr, body:not([data-lang="en"]) .en, body:not([data-lang="es"]) .es{display:none !important}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:12px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px, env(safe-area-inset-left, 0px));padding-right:max(20px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{color:var(--ink);font-weight:800;letter-spacing:-.018em;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+
+/* soft background glows */
+.glow{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0}
+
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:20;background:var(--bg)}
+.nav{position:sticky;top:calc(10px + env(safe-area-inset-top, 0px));z-index:15;padding-top:10px}
+.navin{display:flex;align-items:center;gap:18px;background:rgba(255,255,255,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:999px;padding:8px 8px 8px 20px;box-shadow:0 10px 30px -18px rgba(19,32,42,.25)}
+.brand{font-weight:800;color:var(--ink);text-decoration:none;letter-spacing:-.02em;margin-right:auto;font-size:16px}
+.links{display:flex;gap:4px}
+.links a{text-decoration:none;font-size:14.5px;font-weight:500;color:var(--body);padding:8px 14px;border-radius:999px}
+.links a:hover{background:#F2F4F6;color:var(--ink)}
+.lang{display:inline-flex;background:#F2F4F6;border-radius:999px;padding:3px}
+.lang button{all:unset;cursor:pointer;font-weight:600;font-size:13px;padding:7px 12px;border-radius:999px;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(19,32,42,.12)}
+.lang button:focus-visible{outline:3px solid var(--accent)}
+@media (max-width:720px){.links{display:none}}
+
+/* hero */
+.hero{position:relative;padding-block:64px 40px;overflow:clip}
+html{overflow-x:clip}
+.hero .glow.a{width:520px;height:520px;background:#FFE3C4;right:-120px;top:-60px;opacity:.9}
+.hero .glow.b{width:420px;height:420px;background:#D7F1E6;right:260px;top:220px;opacity:.85}
+.hgrid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:center}
+@media (max-width:960px){.hgrid{grid-template-columns:1fr;gap:36px}}
+.avail{display:inline-flex;align-items:center;gap:10px;background:var(--go-soft);color:var(--go);font-weight:600;font-size:14px;padding:8px 14px;border-radius:999px}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(20,145,95,.18)}
+.hero h1{font-size:clamp(36px,5vw,60px);margin-top:22px;letter-spacing:-.022em}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),#F2A23B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:clamp(17px,1.6vw,20px);color:var(--body);margin-top:20px;max-width:46ch}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:15.5px;padding:14px 22px;border-radius:999px;transition:transform .2s ease, box-shadow .2s ease}
+.btn.primary{background:var(--ink);color:#fff;box-shadow:0 12px 24px -12px rgba(19,32,42,.6)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 18px 30px -14px rgba(19,32,42,.6)}
+.btn.soft{background:#F2F4F6;color:var(--ink)}
+.btn.soft:hover{background:#E9ECEF}
+.trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:30px;color:var(--muted);font-size:14.5px;font-weight:500}
+.trust span{display:inline-flex;align-items:center;gap:8px}
+.trust span+span::before{content:"";width:4px;height:4px;border-radius:50%;background:#C5CDD3;margin-right:10px}
+
+/* device frames */
+.browser{background:#fff;border-radius:18px;box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(19,32,42,.06)}
+.bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#F6F7F8;border-bottom:1px solid var(--line)}
+.bar i{width:10px;height:10px;border-radius:50%;background:#E1E5E8}
+.bar i:nth-child(1){background:#FF8A7A}.bar i:nth-child(2){background:#FFC659}.bar i:nth-child(3){background:#5ED39A}
+.bar span{margin-left:10px;flex:1;max-width:280px;background:#fff;border:1px solid var(--line);border-radius:999px;font-size:12px;color:var(--muted);padding:3px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app{background:#fff;border-radius:22px;box-shadow:var(--shadow);overflow:hidden;border:6px solid #fff}
+.shot{all:unset;display:block;width:100%;box-sizing:border-box;cursor:zoom-in;line-height:0}
+.shot img,.browser img,.app img{width:100%;height:auto;display:block}
+.app .shot img{border-radius:16px}
+
+/* hero stage */
+.stage{position:relative;aspect-ratio:1.18/1;max-width:100%}
+.stage .b1{position:absolute;left:4%;top:4%;width:88%}
+.stage .a1{position:absolute;right:0;bottom:4%;width:30%}
+.stage .b2{position:absolute;left:0;bottom:0;width:52%}
+@media (prefers-reduced-motion:no-preference){
+  .float{animation:float 7s ease-in-out infinite}
+  .float.d2{animation-delay:-2.3s}.float.d3{animation-delay:-4.6s}
+}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -10px}}
+
+/* sections */
+.sec{padding-block:72px}
+.sechead{max-width:720px}
+.kicker{display:inline-block;font-weight:700;font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.sechead h2{font-size:clamp(30px,3.8vw,46px);margin-top:10px}
+.sechead p{margin-top:14px;font-size:18px;color:var(--muted)}
+.grouplabel{display:flex;align-items:center;gap:12px;margin:56px 0 18px;font-weight:700;color:var(--ink);font-size:15px}
+.grouplabel::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* project cards */
+.card{position:relative;border-radius:var(--r-lg);padding:clamp(26px,4vw,52px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,4vw,56px);align-items:center;overflow:hidden}
+.card + .card{margin-top:24px}
+.card.flip .txt{order:2}
+@media (max-width:900px){.card{grid-template-columns:1fr}.card.flip .txt{order:0}}
+.card.blue{background:var(--t-blue)}.card.orange{background:var(--t-orange)}.card.mint{background:var(--t-mint)}.card.coral{background:var(--t-coral)}
+.txt{min-width:0;position:relative;z-index:1}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.75);color:var(--body)}
+.pill.go{color:var(--go)}
+.pill.go .dot{box-shadow:0 0 0 4px rgba(20,145,95,.16)}
+.pill.wip{color:#B15C06}
+.pill.wip .dot{box-shadow:0 0 0 4px rgba(239,125,18,.18)}
+.card h3{font-size:clamp(28px,3.2vw,40px);margin-top:16px}
+.pitch{font-size:clamp(17px,1.5vw,19px);color:var(--body);margin-top:14px;max-width:44ch}
+.ticks{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:10px}
+.ticks li{display:flex;gap:12px;align-items:flex-start;font-weight:600;color:var(--ink);font-size:16px}
+.ticks li::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;margin-top:1px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%23EF7D12' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;box-shadow:0 2px 6px rgba(19,32,42,.08)}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;align-items:center}
+.acts .btn{padding:12px 18px;font-size:15px}
+.acts .btn.soft{background:#fff}
+details{margin-top:18px}
+summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--ink);padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.7)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:18px;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+.more{display:grid;gap:16px;margin-top:16px;background:rgba(255,255,255,.82);border-radius:var(--r-md);padding:22px 24px;font-size:15.5px;line-height:1.65}
+.more b{display:block;color:var(--accent);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.note{font-size:13.5px;color:var(--muted);margin-top:14px}
+.vis{min-width:0;position:relative}
+.vis .browser + .app{position:absolute;right:-6px;bottom:-26px;width:30%}
+.vis .cap{font-size:13px;color:var(--muted);margin-top:12px;text-align:center}
+@media (max-width:900px){.vis .browser + .app{bottom:-18px}}
+.fan{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:center}
+.fan .app:nth-child(2){transform:translateY(-18px) scale(1.06);z-index:1}
+.fan .app{transition:transform .3s}
+
+/* ecosystem graphic */
+.eco{position:relative;aspect-ratio:1/1;max-width:460px;margin:0 auto;width:100%}
+.eco svg{position:absolute;inset:0;width:100%;height:100%}
+.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34%;aspect-ratio:1;border-radius:30px;background:#fff;box-shadow:var(--shadow);display:grid;place-content:center;text-align:center;padding:10px}
+.core b{color:var(--ink);font-size:clamp(16px,2vw,20px);font-weight:800;letter-spacing:-.02em}
+.core span{font-size:12.5px;color:var(--muted);font-weight:600}
+.orb{position:absolute;transform:translate(-50%,-50%);background:#fff;border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:700;color:var(--ink);box-shadow:0 10px 24px -14px rgba(19,32,42,.4);white-space:nowrap}
+.orb.hot{background:var(--ink);color:#fff}
+@media (prefers-reduced-motion:no-preference){.orb{animation:bob 6s ease-in-out infinite}.orb:nth-child(odd){animation-delay:-3s}}
+@keyframes bob{0%,100%{margin-top:0}50%{margin-top:-6px}}
+
+/* method */
+.steps{list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:s}
+.steps li{counter-increment:s;background:#F7F8F9;border-radius:var(--r-md);padding:26px 24px 28px;min-width:0;transition:transform .25s, box-shadow .25s, background .25s}
+.steps li:hover{background:#fff;box-shadow:var(--shadow);transform:translateY(-4px)}
+.steps li::before{content:counter(s);display:grid;place-content:center;width:40px;height:40px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:800;margin-bottom:18px}
+.steps h3{font-size:21px;margin-bottom:6px}
+.steps p{font-size:15.5px;color:var(--muted)}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.tools span{background:#F2F4F6;border-radius:999px;padding:9px 16px;font-weight:600;font-size:14.5px;color:var(--ink)}
+
+/* contact */
+.cta-card{position:relative;overflow:hidden;background:var(--ink);color:#C9D3D9;border-radius:var(--r-lg);padding:clamp(32px,6vw,72px)}
+.cta-card .glow.a{width:420px;height:420px;background:#EF7D12;opacity:.38;right:-120px;top:-160px}
+.cta-card .glow.b{width:360px;height:360px;background:#14915F;opacity:.25;left:-120px;bottom:-200px}
+.cta-card > *:not(.glow){position:relative;z-index:1}
+.cta-card h2{color:#fff;font-size:clamp(30px,4vw,50px);max-width:18ch}
+.cta-card p{margin-top:14px;font-size:18px}
+.crow{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.mail{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);border-radius:999px;padding:7px 7px 7px 20px;font-weight:700}
+.mail #mail{user-select:all}
+.copy{all:unset;cursor:pointer;background:var(--accent);color:#fff;font-weight:700;font-size:14px;padding:10px 16px;border-radius:999px}
+.copy:focus-visible{outline:3px solid #fff}
+.lnk{display:inline-flex;align-items:center;background:rgba(255,255,255,.1);color:#fff;text-decoration:none;font-weight:700;border-radius:999px;padding:14px 20px}
+.lnk:hover{background:rgba(255,255,255,.18)}
+footer{padding-block:28px 40px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+/* lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:min(1400px,94vw);max-height:92vh;overflow:visible}
+dialog::backdrop{background:rgba(19,32,42,.82);backdrop-filter:blur(4px)}
+dialog img{display:block;max-width:min(1400px,94vw);max-height:84vh;width:auto;height:auto;border-radius:16px}
+dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
+#lb-close{all:unset;position:fixed;top:calc(16px + env(safe-area-inset-top, 0px));right:calc(16px + env(safe-area-inset-right, 0px));cursor:pointer;color:#fff;font-weight:700;font-size:14px;background:rgba(255,255,255,.16);padding:10px 16px;border-radius:999px}
+@media (prefers-reduced-motion:no-preference){.shot img{transition:transform .35s ease}.shot:hover img{transform:scale(1.02)}}
+.who{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.avatar{width:64px;height:64px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 4px #fff,0 10px 24px -10px rgba(19,32,42,.45)}
+.who b{display:block;color:var(--ink);font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.who span{font-size:14.5px;color:var(--muted);font-weight:500}
+.avatar.big{width:88px;height:88px;margin-bottom:22px;box-shadow:0 0 0 4px rgba(255,255,255,.15)}
+</style>
+
+</head>
+<body>
+<div class="nav">
+  <div class="wrap">
+    <div class="navin">
+      <a class="brand" href="#top">Mario Iafolla</a>
+      <nav class="links" aria-label="Sections">
+        <a href="#projets"><span class="fr">Projets</span><span class="en">Projects</span><span class="es">Proyectos</span></a>
+        <a href="#methode"><span class="fr">Méthode</span><span class="en">How I work</span><span class="es">Cómo trabajo</span></a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Langue / Language">
+        <button type="button" id="lang-fr" aria-pressed="true">FR</button>
+        <button type="button" id="lang-en" aria-pressed="false">EN</button>
+        <button type="button" id="lang-es" aria-pressed="false">ES</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="glow a"></div><div class="glow b"></div>
+    <div class="wrap hgrid">
+      <div>
+        <div class="who"><img class="avatar" src="img/mario.webp" width="480" height="480" alt="Mario Iafolla"><div><b>Mario Iafolla</b><span><span class="fr">Ingénieur Projets · Groupe Mauffrey</span><span class="en">Project Engineer · Mauffrey Group</span><span class="es">Ingeniero de Proyectos · Grupo Mauffrey</span></span></div></div>
+        <span class="avail"><span class="dot"></span><span class="fr">Disponible pour un VIE dès janvier 2027</span><span class="en">Available for a VIE from January 2027</span><span class="es">Disponible para un VIE desde enero de 2027</span></span>
+        <h1><span class="fr">Je construis avec l’IA des outils que les équipes <em>utilisent vraiment.</em></span><span class="en">I build AI-powered tools that teams <em>actually use.</em></span><span class="es">Construyo con IA herramientas que los equipos <em>usan de verdad.</em></span></h1>
+        <p class="sub"><span class="fr">Profil business, je déploie l’IA dans un groupe de transport et je transforme des besoins concrets en outils fiables.</span><span class="en">A business profile, I roll out AI across a transport group and turn real needs into reliable tools.</span><span class="es">Perfil de negocio, despliego la IA en un grupo de transporte y convierto necesidades reales en herramientas fiables.</span></p>
+        <div class="btns">
+          <a class="btn primary" href="#projets"><span class="fr">Voir mes projets</span><span class="en">See my projects</span><span class="es">Ver mis proyectos</span> →</a>
+          <a class="btn soft" href="#contact"><span class="fr">Me contacter</span><span class="en">Get in touch</span><span class="es">Contactar</span></a>
+        </div>
+        <div class="trust"><span>Groupe Mauffrey</span><span>ICN Business School</span><span><span class="fr">Français · anglais · espagnol</span><span class="en">French · English · Spanish</span><span class="es">Francés · inglés · español</span></span></div>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <div class="browser b1 float"><div class="bar"><i></i><i></i><i></i><span class="fr">Cartographie des flux · outil interne</span><span class="en">Flow mapping · internal tool</span><span class="es">Cartografía de flujos · herramienta interna</span></div><img src="img/carto_map.webp" width="1600" height="772" alt=""></div>
+        <div class="browser b2 float d2"><div class="bar"><i></i><i></i><i></i><span>le-carnet-one.vercel.app</span></div><img src="img/carnet_home.webp" width="1400" height="824" alt=""></div>
+        <div class="app a1 float d3"><img src="img/foyer_patrimoine.webp" width="560" height="646" alt="" style="border-radius:16px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section class="sec" id="projets">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="kicker"><span class="fr">Projets</span><span class="en">Projects</span><span class="es">Proyectos</span></span>
+        <h2><span class="fr">Ce que j’ai construit</span><span class="en">What I’ve built</span><span class="es">Lo que he construido</span></h2>
+        <p><span class="fr">En entreprise d’abord, puis sur mon temps personnel. Chaque outil est en service.</span><span class="en">At work first, then in my own time. Every tool is in use.</span><span class="es">Primero en la empresa, después en mi tiempo personal. Todas las herramientas están en uso.</span></p>
+      </div>
+
+      <div class="grouplabel"><span class="fr">En entreprise · Groupe Mauffrey</span><span class="en">At work · Mauffrey Group</span><span class="es">En la empresa · Grupo Mauffrey</span></div>
+
+      <!-- CARTOGRAPHIE -->
+      <article class="card blue" id="cartographie">
+        <div class="txt">
+          <div class="meta"><span class="pill go"><span class="dot"></span><span class="fr">En production</span><span class="en">In production</span><span class="es">En producción</span></span><span class="pill"><span class="fr">Outil métier</span><span class="en">Business tool</span><span class="es">Herramienta de negocio</span></span></div>
+          <h3><span class="fr">Cartographie des flux</span><span class="en">Flow mapping tool</span><span class="es">Cartografía de flujos</span></h3>
+          <p class="pitch"><span class="fr">Après un benchmark peu concluant, j’ai pris l’initiative de créer avec Claude l’outil qui transforme un fichier Excel en carte prête pour le client.</span><span class="en">After a disappointing market benchmark, I took the initiative to build with Claude the tool that turns an Excel file into a client-ready map.</span><span class="es">Tras un benchmark poco convincente, tomé la iniciativa de crear con Claude la herramienta que convierte un archivo Excel en un mapa listo para el cliente.</span></p>
+          <ul class="ticks">
+            <li><span class="fr">Présenté et validé par la direction</span><span class="en">Presented to and approved by management</span><span class="es">Presentada y validada por la dirección</span></li>
+            <li><span class="fr">Agences du groupe affichées face aux sites du client</span><span class="en">Group branches shown next to the client’s sites</span><span class="es">Agencias del grupo junto a los centros del cliente</span></li>
+            <li><span class="fr">Adopté par le bureau d’études</span><span class="en">Adopted by the bid office</span><span class="es">Adoptada por la oficina técnica</span></li>
+            <li><span class="fr">Déployé avec un guide et une formation</span><span class="en">Rolled out with a guide and training</span><span class="es">Desplegada con una guía y formación</span></li>
+          </ul>
+          <details>
+            <summary><span class="fr">En savoir plus</span><span class="en">Read more</span><span class="es">Saber más</span></summary>
+            <div class="more">
+              <p><b><span class="fr">Le besoin</span><span class="en">The need</span><span class="es">La necesidad</span></b><span class="fr">Dans un mémoire technique d’appel d’offres, la carte des flux (d’où partent les camions, où ils vont, avec quels volumes) est souvent ce qui parle le plus au client. Sa réalisation était longue, différente d’un dossier à l’autre et impossible à reprendre.</span><span class="en">In a tender response, the flow map (where trucks leave from, where they go, with what volumes) is often what speaks most to the client. Making one was slow, different for every bid and impossible to reuse.</span><span class="es">En una respuesta a licitación, el mapa de flujos (de dónde salen los camiones, adónde van y con qué volúmenes) suele ser lo que más convence al cliente. Hacerlo era lento, distinto en cada expediente e imposible de reutilizar.</span></p>
+              <p><b><span class="fr">Mon initiative</span><span class="en">My initiative</span><span class="es">Mi iniciativa</span></b><span class="fr">J’ai mené un benchmark des solutions du marché. Aucune ne me satisfaisait au regard de nos besoins et de leur prix. Plutôt que de choisir un outil par défaut, j’ai pris l’initiative de développer le nôtre avec Claude, puis je l’ai présenté à la direction, qui a apprécié le résultat et validé son déploiement.</span><span class="en">I benchmarked the solutions on the market. None satisfied me given our needs and their price. Rather than settle for one, I took the initiative to build our own with Claude, then presented it to management, who liked the result and approved the roll-out.</span><span class="es">Realicé un benchmark de las soluciones del mercado. Ninguna me convencía por nuestras necesidades y su precio. En lugar de conformarme con una, tomé la iniciativa de desarrollar la nuestra con Claude y la presenté a la dirección, que valoró el resultado y aprobó su despliegue.</span></p>
+              <p><b><span class="fr">Ma méthode</span><span class="en">How I built it</span><span class="es">Cómo la construí</span></b><span class="fr">L’IA a écrit le code, j’ai gardé la main sur tout ce qui relève du métier : une ligne Excel égale un flux, des typologies adaptées à nos marchés, une carte entièrement en français. J’ai testé chaque version sur de vrais dossiers d’appels d’offres. À chaque problème, je l’isolais, je le documentais avec une capture et un exemple précis, puis je le faisais corriger, jusqu’à une version stable.</span><span class="en">AI wrote the code; I kept control of everything business-related: one Excel row is one flow, flow types that match our markets, a map fully in French. I tested every version on real tenders. Each time something broke, I isolated it, documented it with a screenshot and a precise example, then had it fixed, until the version was stable.</span><span class="es">La IA escribió el código; yo mantuve el control de todo lo que es negocio: una fila de Excel equivale a un flujo, tipologías adaptadas a nuestros mercados, un mapa totalmente en francés. Probé cada versión con licitaciones reales. Cada vez que algo fallaba, lo aislaba, lo documentaba con una captura y un ejemplo preciso y lo hacía corregir, hasta lograr una versión estable.</span></p>
+              <p><b><span class="fr">Ce qui a résisté</span><span class="en">What pushed back</span><span class="es">Lo que se resistió</span></b><span class="fr">Des adresses introuvables alors qu’elles existaient, des noms de lieux qui s’affichaient en anglais, une carte devenue illisible à force d’informations, un fournisseur de fond de carte qui a changé ses conditions du jour au lendemain, des adresses à l’étranger à prendre en charge. J’ai traité chaque point en remontant à la cause plutôt qu’en contournant le symptôme, et j’ai su abandonner les pistes qui n’apportaient rien au rendu final.</span><span class="en">Addresses that existed but could not be found, place names showing in English, a map cluttered into unreadability, a base-map provider changing its terms overnight, foreign addresses to support. I fixed each issue at its root rather than working around the symptom, and dropped ideas that added nothing to the final result.</span><span class="es">Direcciones que existían pero no se encontraban, nombres de lugares en inglés, un mapa ilegible por exceso de información, un proveedor de fondo de mapa que cambió sus condiciones de un día para otro, direcciones en el extranjero. Resolví cada problema en su causa en lugar de esquivar el síntoma, y descarté las ideas que no aportaban nada al resultado final.</span></p>
+              <p><b><span class="fr">Le résultat</span><span class="en">The result</span><span class="es">El resultado</span></b><span class="fr">Un outil qui transforme un simple fichier Excel en carte prête à intégrer dans un mémoire technique. On importe une matrice Excel pour afficher d’un coup tous les flux voulus, puis on les modifie ou on masque ceux qu’on ne veut pas montrer. Les adresses sont localisées automatiquement en France et dans les pays limitrophes, les flux sont organisés en calques par type, et la carte s’exporte en haute définition avec le logo du client. Les projets s’enregistrent pour être repris ou partagés. Déployé auprès de l’équipe avec un guide et une matrice type, puis présenté à mes collègues lors d’une matinée consacrée à l’IA.</span><span class="en">A tool that turns a plain Excel file into a map ready for a tender response. You import an Excel matrix to display all the flows you want at once, then edit them or hide the ones you don’t want to show. Addresses are geocoded automatically in France and neighbouring countries, flows are organised in layers by type, and the map exports in high resolution with the client’s logo. Projects are saved to reopen or share. Rolled out to the team with a guide and a template, then presented to colleagues at an internal AI morning.</span><span class="es">Una herramienta que convierte un simple archivo Excel en un mapa listo para una respuesta a licitación. Se importa una matriz Excel para mostrar de una vez todos los flujos deseados, y después se modifican u ocultan los que no se quieren mostrar. Las direcciones se geolocalizan automáticamente en Francia y los países limítrofes, los flujos se organizan en capas por tipo y el mapa se exporta en alta definición con el logotipo del cliente. Los proyectos se guardan para retomarlos o compartirlos. Desplegada en el equipo con una guía y una plantilla, y presentada a mis compañeros en una mañana dedicada a la IA.</span></p>
+              <p><b><span class="fr">Le réseau du groupe</span><span class="en">The group’s network</span><span class="es">La red del grupo</span></b><span class="fr">J’ai importé les implantations des agences du groupe dans l’outil. Sur la carte, le client voit immédiatement notre proximité avec ses sites et notre présence régionale : un argument concret, là où un mémoire se contente souvent de l’affirmer.</span><span class="en">I loaded the group’s branch locations into the tool. On the map, the client immediately sees how close we are to their sites and how strong our regional presence is: a concrete argument where tender responses usually just claim it.</span><span class="es">Cargué en la herramienta la ubicación de las agencias del grupo. En el mapa, el cliente ve de inmediato nuestra cercanía a sus centros y nuestra presencia regional: un argumento concreto donde las respuestas a licitaciones suelen limitarse a afirmarlo.</span></p>
+              <p><b><span class="fr">Ce que ça montre</span><span class="en">What it shows</span><span class="es">Lo que demuestra</span></b><span class="fr">Comprendre ce qui convainc un client, aller chercher le bon outil quand il n’existe pas, et porter un sujet de l’idée jusqu’à l’adoption par l’équipe.</span><span class="en">Understanding what convinces a client, building the right tool when it doesn’t exist, and carrying a project from idea to team adoption.</span><span class="es">Entender lo que convence a un cliente, crear la herramienta adecuada cuando no existe y llevar un proyecto de la idea a la adopción por el equipo.</span></p>
+            </div>
+          </details>
+          <p class="note"><span class="fr">Outil interne : captures anonymisées.</span><span class="en">Internal tool: screenshots anonymised.</span><span class="es">Herramienta interna: capturas anonimizadas.</span></p>
+        </div>
+        <div class="vis">
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><span class="fr">Cartographie des flux · outil interne</span><span class="en">Flow mapping · internal tool</span><span class="es">Cartografía de flujos · herramienta interna</span></div><button class="shot" type="button" data-cap-fr="Carte des flux exportée, données anonymisées" data-cap-en="Exported flow map, anonymised" data-cap-es="Mapa de flujos exportado, anonimizado"><img src="img/carto_map.webp" width="1600" height="772" alt="Carte des flux autour d’un dépôt, par type de collecte" data-alt-en="Map of flows around a depot, by collection type" data-alt-es="Mapa de flujos alrededor de un depósito, por tipo de recogida"></button></div>
+          <div class="app"><button class="shot" type="button" data-cap-fr="Réglages de la carte" data-cap-en="Map settings" data-cap-es="Ajustes del mapa"><img src="img/carto_panel.webp" width="520" height="974" alt="Panneau de réglages de l’outil" data-alt-en="Tool settings panel" data-alt-es="Panel de ajustes de la herramienta"></button></div>
+        </div>
+      </article>
+
+      <!-- IA DANS LE GROUPE -->
+      <article class="card orange flip" id="groupe">
+        <div class="txt">
+          <div class="meta"><span class="pill wip"><span class="dot"></span><span class="fr">En cours</span><span class="en">Ongoing</span><span class="es">En curso</span></span><span class="pill"><span class="fr">Déploiement de l’IA</span><span class="en">AI roll-out</span><span class="es">Despliegue de la IA</span></span></div>
+          <h3><span class="fr">L’IA à l’échelle du groupe</span><span class="en">AI across the group</span><span class="es">La IA a escala del grupo</span></h3>
+          <p class="pitch"><span class="fr">Je déploie l’IA là où les équipes travaillent déjà, en lien avec la DSI.</span><span class="en">I bring AI to where teams already work, together with the IT department.</span><span class="es">Llevo la IA allí donde los equipos ya trabajan, junto con el departamento de sistemas.</span></p>
+          <ul class="ticks">
+            <li><span class="fr">Copilot Pro dans Microsoft 365 et SharePoint</span><span class="en">Copilot Pro inside Microsoft 365 and SharePoint</span><span class="es">Copilot Pro en Microsoft 365 y SharePoint</span></li>
+            <li><span class="fr">Agents aux instructions validées par la direction</span><span class="en">Agents with management-approved instructions</span><span class="es">Agentes con instrucciones validadas por la dirección</span></li>
+            <li><span class="fr">Sécurité et compatibilité vues avec la DSI</span><span class="en">Security and compatibility handled with IT</span><span class="es">Seguridad y compatibilidad con el departamento de sistemas</span></li>
+          </ul>
+          <details>
+            <summary><span class="fr">En savoir plus</span><span class="en">Read more</span><span class="es">Saber más</span></summary>
+            <div class="more">
+              <p><b><span class="fr">Pourquoi Copilot</span><span class="en">Why Copilot</span><span class="es">Por qué Copilot</span></b><span class="fr">L’environnement du groupe repose sur SharePoint et Microsoft 365. Copilot était donc le choix logique : l’IA arrive directement dans Excel, PowerPoint et SharePoint, sur les documents de l’entreprise, là où les équipes travaillent déjà. Un outil qu’il faut aller chercher dans un onglet séparé n’est jamais adopté.</span><span class="en">The group runs on SharePoint and Microsoft 365, so Copilot was the logical choice: AI lands directly in Excel, PowerPoint and SharePoint, on the company’s own documents, where teams already work. A tool people must go and find in a separate tab never gets adopted.</span><span class="es">El grupo trabaja con SharePoint y Microsoft 365, así que Copilot era la opción lógica: la IA llega directamente a Excel, PowerPoint y SharePoint, sobre los documentos de la empresa, donde los equipos ya trabajan. Una herramienta que hay que ir a buscar a otra pestaña nunca se adopta.</span></p>
+              <p><b><span class="fr">Avec la DSI</span><span class="en">With IT</span><span class="es">Con sistemas</span></b><span class="fr">Un outil d’IA entre dans un système d’information existant. Je travaille avec la DSI sur la compatibilité avec l’existant et sur la cybersécurité : droits d’accès, données sensibles, règles d’usage. Ces sujets se traitent dès le cadrage, pas après le déploiement.</span><span class="en">An AI tool lands inside an existing information system. I work with the IT department on compatibility and cybersecurity: access rights, sensitive data, usage rules. These are settled at the framing stage, not after roll-out.</span><span class="es">Una herramienta de IA entra en un sistema de información existente. Trabajo con el departamento de sistemas la compatibilidad y la ciberseguridad: permisos de acceso, datos sensibles, normas de uso. Estas cuestiones se resuelven desde el planteamiento, no después del despliegue.</span></p>
+              <p><b><span class="fr">Agents et automatisations</span><span class="en">Agents and automations</span><span class="es">Agentes y automatizaciones</span></b><span class="fr">Laissés seuls, deux utilisateurs posant la même question obtiennent deux réponses de qualité très différente. Je rédige donc les instructions des agents et je les fais valider par la direction, pour que chacun obtienne la même qualité de réponse, conforme à nos process. Je mets aussi en place des automatisations IA qui prennent en charge les tâches répétitives, toujours avec un contrôle humain sur le résultat.</span><span class="en">Left alone, two users asking the same question get answers of very different quality. So I write the agents’ instructions and have them approved by management, so everyone gets the same quality of answer, in line with our processes. I also set up AI automations that take over repetitive tasks, always with a human check on the output.</span><span class="es">Por su cuenta, dos usuarios que hacen la misma pregunta obtienen respuestas de calidad muy distinta. Por eso redacto las instrucciones de los agentes y las hago validar por la dirección, para que todos obtengan la misma calidad de respuesta, conforme a nuestros procesos. También pongo en marcha automatizaciones con IA que se encargan de las tareas repetitivas, siempre con un control humano del resultado.</span></p>
+              <p><b><span class="fr">Faire adopter</span><span class="en">Getting it used</span><span class="es">Lograr la adopción</span></b><span class="fr">Je travaille aux côtés de la responsable des processus commerciaux sur l’apport de Copilot pour l’équipe commerciale, par exemple pour répondre plus vite aux objections. J’ai animé un atelier en réunion commerciale et des formations par groupes en ligne : 40 commerciaux formés à un outil interne.</span><span class="en">I work alongside the head of sales processes on what Copilot brings to the sales team, such as answering objections faster. I ran a workshop at a sales meeting and online group training sessions: 40 salespeople trained on an internal tool.</span><span class="es">Trabajo junto a la responsable de procesos comerciales en lo que Copilot aporta al equipo comercial, por ejemplo para responder más rápido a las objeciones. Animé un taller en una reunión comercial y formaciones en grupo en línea: 40 comerciales formados en una herramienta interna.</span></p>
+              <p><b><span class="fr">La Ruche</span><span class="en">La Ruche</span><span class="es">La Ruche</span></b><span class="fr">J’ai mené la refonte de cet outil de présentation conçu pour le commerce. Il s’est ensuite étendu à l’ensemble des services du groupe pour présenter rapidement le groupe, une filiale ou une région, à partir de données dynamiques et de modèles préconçus. Un projet est en cours pour y intégrer de nouvelles fonctionnalités par l’IA.</span><span class="en">I led the rebuild of this sales presentation tool. It then spread to every department, to present the group, a subsidiary or a region in minutes, from live data and ready-made templates. A project is under way to add new AI features.</span><span class="es">Dirigí la renovación de esta herramienta de presentación pensada para el área comercial. Después se extendió a todos los departamentos del grupo para presentar en minutos el grupo, una filial o una región, a partir de datos dinámicos y plantillas prediseñadas. Hay un proyecto en marcha para añadir nuevas funciones con IA.</span></p>
+              <p><b><span class="fr">L’outil de chiffrage</span><span class="en">The pricing tool</span><span class="es">La herramienta de tarificación</span></b><span class="fr">Mission fil rouge de mon contrat : l’outil de chiffrage spot et boucle est une matrice Excel qui permet de chiffrer un coût de transport, mais son manque d’ergonomie freine son usage. Je construis une solution plus rapide et plus simple, pour que l’équipe commerciale obtienne un prix en quelques instants.</span><span class="en">The core mission of my contract: the spot and loop pricing tool is an Excel matrix for costing a transport job, but it is hard to use and rarely opened. I am building a faster, simpler solution so the sales team gets a price in moments.</span><span class="es">La misión central de mi contrato: la herramienta de tarificación spot y circuito es una matriz Excel para calcular el coste de un transporte, pero es poco práctica y apenas se usa. Estoy construyendo una solución más rápida y sencilla para que el equipo comercial obtenga un precio en un momento.</span></p>
+              <p><b><span class="fr">Au quotidien</span><span class="en">Every day</span><span class="es">En el día a día</span></b><span class="fr">ChatGPT, Gemini, Claude, Copilot : je les utilise tous et je les compare selon la tâche, la confidentialité des données et l’environnement de l’entreprise.</span><span class="en">ChatGPT, Gemini, Claude, Copilot: I use them all and weigh them against the task, data sensitivity and the company’s environment.</span><span class="es">ChatGPT, Gemini, Claude, Copilot: los uso todos y los comparo según la tarea, la confidencialidad de los datos y el entorno de la empresa.</span></p>
+            </div>
+          </details>
+          <p class="note"><span class="fr">Outils internes, présentés en description.</span><span class="en">Internal tools, described rather than shown.</span><span class="es">Herramientas internas, descritas y no mostradas.</span></p>
+        </div>
+        <div class="vis">
+          <div class="eco" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="#EFC9A0" stroke-width=".4" stroke-dasharray="1.2 1.6"/><circle cx="50" cy="50" r="44" fill="none" stroke="#EFC9A0" stroke-width=".4" stroke-dasharray="1.2 1.6"/></svg>
+            <div class="core"><b>Copilot</b><span>Microsoft 365</span></div>
+            <span class="orb" style="left:50%;top:6%">SharePoint</span>
+            <span class="orb hot" style="left:86%;top:24%"><span class="fr">Agents</span><span class="en">Agents</span><span class="es">Agentes</span></span>
+            <span class="orb" style="left:92%;top:58%">Excel</span>
+            <span class="orb" style="left:74%;top:88%">PowerPoint</span>
+            <span class="orb hot" style="left:30%;top:90%"><span class="fr">DSI · sécurité</span><span class="en">IT · security</span><span class="es">Sistemas · seguridad</span></span>
+            <span class="orb" style="left:9%;top:62%">La Ruche</span>
+            <span class="orb" style="left:16%;top:26%"><span class="fr">Chiffrage</span><span class="en">Pricing</span><span class="es">Tarificación</span></span>
+          </div>
+        </div>
+      </article>
+
+      <div class="grouplabel"><span class="fr">Projets personnels</span><span class="en">Personal projects</span><span class="es">Proyectos personales</span></div>
+
+      <!-- FOYER -->
+      <article class="card mint" id="foyer">
+        <div class="txt">
+          <div class="meta"><span class="pill go"><span class="dot"></span><span class="fr">En service</span><span class="en">Live</span><span class="es">En servicio</span></span><span class="pill"><span class="fr">Application</span><span class="en">App</span><span class="es">Aplicación</span></span></div>
+          <h3>Foyer</h3>
+          <p class="pitch"><span class="fr">Une application de budget et de patrimoine que ma famille utilise chaque jour.</span><span class="en">A budgeting and net-worth app my family uses every day.</span><span class="es">Una aplicación de presupuesto y patrimonio que mi familia usa cada día.</span></p>
+          <ul class="ticks">
+            <li><span class="fr">Comptes et données synchronisées</span><span class="en">Accounts and synced data</span><span class="es">Cuentas y datos sincronizados</span></li>
+            <li><span class="fr">Un espace privé par foyer</span><span class="en">A private space per household</span><span class="es">Un espacio privado por hogar</span></li>
+            <li><span class="fr">Frais pro séparés des dépenses perso</span><span class="en">Business costs kept apart from personal ones</span><span class="es">Gastos profesionales separados de los personales</span></li>
+          </ul>
+          <div class="acts">
+            <a class="btn primary" href="https://claude.ai/artifact/X35czBRV4FWqge1TdBzZSA" target="_blank" rel="noopener"><span class="fr">Ouvrir la démo</span><span class="en">Open the demo</span><span class="es">Abrir la demo</span> ↗</a>
+          </div>
+          <details>
+            <summary><span class="fr">En savoir plus</span><span class="en">Read more</span><span class="es">Saber más</span></summary>
+            <div class="more">
+              <p><b><span class="fr">Le besoin</span><span class="en">The need</span><span class="es">La necesidad</span></b><span class="fr">En 2026, suivre son budget de près est devenu essentiel. Je voulais une application pour suivre les dépenses, les charges fixes et le patrimoine (épargne, placements, immobilier, emprunts) au sein d’une même famille, chaque foyer gardant son espace privé. Mon père, en profession libérale, avait en plus besoin de séparer ses frais professionnels de ses dépenses personnelles.</span><span class="en">Keeping a close eye on your budget has become essential. I wanted an app to track spending, fixed costs and net worth (savings, investments, property, loans) across one family, each household keeping its own private space. My father, who is self-employed, also needed his business expenses kept apart from his personal ones.</span><span class="es">Seguir de cerca el presupuesto se ha vuelto esencial. Quería una aplicación para controlar gastos, gastos fijos y patrimonio (ahorro, inversiones, inmuebles, préstamos) dentro de una misma familia, con un espacio privado para cada hogar. Mi padre, profesional autónomo, necesitaba además separar sus gastos profesionales de los personales.</span></p>
+              <p><b><span class="fr">Ce qu’elle fait</span><span class="en">What it does</span><span class="es">Qué hace</span></b><span class="fr">Les opérations du mois et celles à venir, attribuées à la personne qui a payé. Les montants fixes déclarés une seule fois, l’import d’un relevé bancaire. Le patrimoine par support, du PEA à l’assurance-vie, détaillable jusqu’aux lignes d’ETF ou d’actions.</span><span class="en">This month’s and upcoming transactions, attributed to whoever paid. Fixed amounts entered once, bank statement import. Net worth by account, from stock savings plans to life insurance, down to individual ETF or stock lines.</span><span class="es">Las operaciones del mes y las próximas, atribuidas a quien pagó. Los importes fijos se registran una sola vez y se puede importar un extracto bancario. El patrimonio por producto, del plan de ahorro en acciones al seguro de vida, con detalle hasta cada ETF o acción.</span></p>
+              <p><b><span class="fr">Mon rôle</span><span class="en">My role</span><span class="es">Mi papel</span></b><span class="fr">J’ai piloté l’IA de bout en bout : cadrer le besoin, rédiger les demandes, faire les arbitrages, tester, corriger et déployer. Le code a été écrit par l’IA, les décisions sont les miennes.</span><span class="en">I drove the AI end to end: framing the need, writing the requests, making the calls, testing, fixing and deploying. AI wrote the code; the decisions are mine.</span><span class="es">Dirigí la IA de principio a fin: plantear la necesidad, redactar las peticiones, decidir, probar, corregir y desplegar. La IA escribió el código; las decisiones son mías.</span></p>
+              <p><b><span class="fr">Comment je vérifie</span><span class="en">How I check it</span><span class="es">Cómo lo verifico</span></b><span class="fr">Je ne prends pas ce que produit l’IA pour argent comptant. Chaque version passe des tests automatiques avant la mise en ligne, puis je la simule sur des cas concrets avant qu’elle n’arrive chez ses utilisateurs.</span><span class="en">I never take what AI produces at face value. Every version runs through automated tests before release, then I walk it through real cases before it reaches its users.</span><span class="es">Nunca doy por bueno lo que produce la IA. Cada versión pasa pruebas automáticas antes de publicarse y después la simulo con casos reales antes de que llegue a sus usuarios.</span></p>
+              <p><b><span class="fr">Aujourd’hui</span><span class="en">Today</span><span class="es">Hoy</span></b><span class="fr">Une vraie application en ligne, avec comptes utilisateurs et données synchronisées entre appareils, utilisée au quotidien par ma famille et améliorée au fil de ses retours.</span><span class="en">A real live app, with user accounts and data synced across devices, used daily by my family and improved from their feedback.</span><span class="es">Una aplicación real en línea, con cuentas de usuario y datos sincronizados entre dispositivos, que mi familia usa a diario y que mejora con sus comentarios.</span></p>
+            </div>
+          </details>
+          <p class="note"><span class="fr">Démo avec données fictives, sans inscription.</span><span class="en">Demo with sample data, no sign-up.</span><span class="es">Demo con datos ficticios, sin registro.</span></p>
+        </div>
+        <div class="vis">
+          <div class="fan">
+            <div class="app"><button class="shot" type="button" data-cap-fr="Foyer · opérations du mois" data-cap-en="Foyer · this month’s transactions" data-cap-es="Foyer · operaciones del mes"><img src="img/foyer_operations.webp" width="560" height="646" alt="Foyer : opérations du mois" data-alt-en="Foyer: this month’s transactions" data-alt-es="Foyer: operaciones del mes"></button></div>
+            <div class="app"><button class="shot" type="button" data-cap-fr="Foyer · patrimoine" data-cap-en="Foyer · net worth" data-cap-es="Foyer · patrimonio"><img src="img/foyer_patrimoine.webp" width="560" height="646" alt="Foyer : répartition du patrimoine" data-alt-en="Foyer: net-worth breakdown" data-alt-es="Foyer: reparto del patrimonio"></button></div>
+            <div class="app"><button class="shot" type="button" data-cap-fr="Foyer · saisie d’une opération" data-cap-en="Foyer · adding a transaction" data-cap-es="Foyer · registro de una operación"><img src="img/foyer_operation.webp" width="560" height="646" alt="Foyer : saisie d’une opération" data-alt-en="Foyer: adding a transaction" data-alt-es="Foyer: registro de una operación"></button></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- LE CARNET -->
+      <article class="card coral flip" id="carnet">
+        <div class="txt">
+          <div class="meta"><span class="pill wip"><span class="dot"></span><span class="fr">V1 · finalisation</span><span class="en">V1 · finishing</span><span class="es">V1 · en finalización</span></span><span class="pill"><span class="fr">Site web</span><span class="en">Website</span><span class="es">Sitio web</span></span></div>
+          <h3>Le Carnet</h3>
+          <p class="pitch"><span class="fr">Un site pour rendre l’investissement accessible, sans rien vendre de financier.</span><span class="en">A site that makes investing approachable, without selling any financial product.</span><span class="es">Un sitio para hacer accesible la inversión, sin vender ningún producto financiero.</span></p>
+          <ul class="ticks">
+            <li><span class="fr">Notions de deux minutes</span><span class="en">Two-minute lessons</span><span class="es">Nociones de dos minutos</span></li>
+            <li><span class="fr">Simulateurs sur ses propres chiffres</span><span class="en">Calculators on your own numbers</span><span class="es">Simuladores con tus propias cifras</span></li>
+            <li><span class="fr">Examens et certificat</span><span class="en">Tests and a certificate</span><span class="es">Exámenes y certificado</span></li>
+          </ul>
+          <div class="acts">
+            <a class="btn primary" href="https://le-carnet-one.vercel.app" target="_blank" rel="noopener"><span class="fr">Voir la V1</span><span class="en">See the V1</span><span class="es">Ver la V1</span> ↗</a>
+          </div>
+          <details>
+            <summary><span class="fr">En savoir plus</span><span class="en">Read more</span><span class="es">Saber más</span></summary>
+            <div class="more">
+              <p><b><span class="fr">L’idée</span><span class="en">The idea</span><span class="es">La idea</span></b><span class="fr">Rendre l’investissement accessible et ludique, sans rien vendre de financier. Je m’intéresse depuis longtemps à l’éducation financière, et je voulais un outil qui explique simplement, sans jargon.</span><span class="en">Make investing approachable and engaging, without selling any financial product. I have long been interested in financial education, and wanted a tool that explains things simply, without jargon.</span><span class="es">Hacer la inversión accesible y amena, sin vender ningún producto financiero. Me interesa desde hace tiempo la educación financiera y quería una herramienta que lo explicara de forma sencilla, sin jerga.</span></p>
+              <p><b><span class="fr">Le parcours</span><span class="en">The journey</span><span class="es">El recorrido</span></b><span class="fr">On teste ses connaissances avec un quiz du jour, puis on choisit un parcours selon son objectif (premiers placements, achat immobilier, crypto…) ou on le fait cibler par un test de niveau. On progresse ensuite avec des notions courtes, des simulateurs sur ses propres chiffres, des examens par chapitre et un certificat au bout.</span><span class="en">You test yourself with a daily quiz, then pick a path by goal (first investments, buying a home, crypto…) or let a level test choose it. You then progress through short lessons, calculators on your own numbers, chapter tests and a certificate at the end.</span><span class="es">Pones a prueba tus conocimientos con un quiz del día, eliges un itinerario según tu objetivo (primeras inversiones, comprar vivienda, cripto…) o dejas que una prueba de nivel lo elija. Después avanzas con nociones breves, simuladores con tus propias cifras, exámenes por capítulo y un certificado al final.</span></p>
+              <p><b><span class="fr">Le modèle</span><span class="en">The model</span><span class="es">El modelo</span></b><span class="fr">Freemium : le contenu gratuit attire, des packs payants accompagnent le passage à l’action.</span><span class="en">Freemium: free content draws people in, paid packs support them when they take action.</span><span class="es">Freemium: el contenido gratuito atrae y los packs de pago acompañan el paso a la acción.</span></p>
+              <p><b><span class="fr">Mon rôle</span><span class="en">My role</span><span class="es">Mi papel</span></b><span class="fr">Product owner de bout en bout, avec un agent IA de développement comme copilote. J’ai défini la vision, l’expérience utilisateur et le modèle économique, testé chaque version en conditions réelles et tranché les choix produit et éthiques : aucun faux avis, aucune mécanique de jeu d’argent.</span><span class="en">End-to-end product owner, with an AI coding agent as co-pilot. I set the vision, the user experience and the business model, tested every version in real conditions and made the product and ethical calls: no fake reviews, no gambling mechanics.</span><span class="es">Product owner de principio a fin, con un agente de IA de desarrollo como copiloto. Definí la visión, la experiencia de usuario y el modelo de negocio, probé cada versión en condiciones reales y tomé las decisiones de producto y éticas: ninguna reseña falsa, ninguna mecánica de juego de azar.</span></p>
+              <p><b><span class="fr">Où il en est</span><span class="en">Where it stands</span><span class="es">Dónde está</span></b><span class="fr">La V1 est fonctionnelle, avec comptes, paiement et tests automatisés, construite en quelques semaines alors que mon profil est business et pas développeur. Je finalise le contenu des parcours et des packs avant la mise en ligne publique.</span><span class="en">The V1 works, with accounts, payments and automated tests, built in a few weeks although my background is business, not engineering. I am finishing the paths and packs before the public launch.</span><span class="es">La V1 funciona, con cuentas, pagos y pruebas automatizadas, construida en pocas semanas aunque mi perfil es de negocio y no de desarrollador. Estoy terminando los itinerarios y los packs antes del lanzamiento público.</span></p>
+            </div>
+          </details>
+        </div>
+        <div class="vis">
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><span>le-carnet-one.vercel.app</span></div><button class="shot" type="button" data-cap-fr="Le Carnet · choix du parcours" data-cap-en="Le Carnet · choosing a path" data-cap-es="Le Carnet · elección del itinerario"><img src="img/carnet_home.webp" width="1400" height="824" alt="Le Carnet : choix du parcours" data-alt-en="Le Carnet: choosing a learning path" data-alt-es="Le Carnet: elección del itinerario"></button></div>
+          <div class="app"><button class="shot" type="button" data-cap-fr="Le Carnet · question de vérification" data-cap-en="Le Carnet · check question" data-cap-es="Le Carnet · pregunta de verificación"><img src="img/carnet_examen.webp" width="1400" height="1206" alt="Le Carnet : question de vérification" data-alt-en="Le Carnet: check question" data-alt-es="Le Carnet: pregunta de verificación"></button></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- METHODE -->
+  <section class="sec" id="methode" style="padding-top:24px">
+    <div class="wrap">
+      <div class="sechead">
+        <span class="kicker"><span class="fr">Méthode</span><span class="en">How I work</span><span class="es">Cómo trabajo</span></span>
+        <h2><span class="fr">L’IA écrit le code. Le reste, c’est moi.</span><span class="en">AI writes the code. The rest is on me.</span><span class="es">La IA escribe el código. El resto depende de mí.</span></h2>
+      </div>
+      <ol class="steps">
+        <li><h3><span class="fr">Cadrer</span><span class="en">Frame</span><span class="es">Plantear</span></h3><p><span class="fr">Qui utilise l’outil, pour quelle décision, à quelle fréquence.</span><span class="en">Who uses the tool, for which decision, how often.</span><span class="es">Quién usa la herramienta, para qué decisión y con qué frecuencia.</span></p></li>
+        <li><h3><span class="fr">Construire</span><span class="en">Build</span><span class="es">Construir</span></h3><p><span class="fr">Je fais coder l’IA et je garde la main sur les règles métier.</span><span class="en">AI codes; I keep control of the business rules.</span><span class="es">La IA programa; yo controlo las reglas de negocio.</span></p></li>
+        <li><h3><span class="fr">Vérifier</span><span class="en">Check</span><span class="es">Verificar</span></h3><p><span class="fr">Cas concrets, tests encore et encore. Un total faux ne passe pas.</span><span class="en">Real cases, tests again and again. A wrong total never ships.</span><span class="es">Casos reales, pruebas una y otra vez. Un total erróneo nunca sale.</span></p></li>
+        <li><h3><span class="fr">Faire adopter</span><span class="en">Get it used</span><span class="es">Lograr la adopción</span></h3><p><span class="fr">Guide, formation, suivi. Un outil inutilisé n’existe pas.</span><span class="en">Guide, training, follow-up. An unused tool doesn’t exist.</span><span class="es">Guía, formación y seguimiento. Una herramienta que nadie usa no existe.</span></p></li>
+      </ol>
+      <div class="tools"><span>ChatGPT</span><span>Gemini</span><span>Claude</span><span>Claude Code</span><span>Microsoft 365 Copilot</span><span>SharePoint</span><span>Lovable</span><span><span class="fr">Excel avancé</span><span class="en">Advanced Excel</span><span class="es">Excel avanzado</span></span><span>QlikSense</span></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec" id="contact" style="padding-top:24px">
+    <div class="wrap">
+      <div class="cta-card">
+        <div class="glow a"></div><div class="glow b"></div>
+        <img class="avatar big" src="img/mario.webp" width="480" height="480" alt="Mario Iafolla">
+        <h2><span class="fr">Envie d’en voir plus ? Je vous fais la démo.</span><span class="en">Want to see more? I’ll give you a live demo.</span><span class="es">¿Quiere ver más? Le hago una demo en directo.</span></h2>
+        <p><span class="fr">VIE dès janvier 2027 · français, anglais, espagnol</span><span class="en">VIE from January 2027 · French, English, Spanish</span><span class="es">VIE desde enero de 2027 · francés, inglés, español</span></p>
+        <div class="crow">
+          <span class="mail"><span id="mail">mario.iafolla@gmail.com</span><button class="copy" type="button" id="copy"><span class="fr">Copier</span><span class="en">Copy</span><span class="es">Copiar</span></button></span>
+          <a class="lnk" href="https://www.linkedin.com/in/mario-iafolla-484b42287" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Mario Iafolla</span>
+    <span><span class="fr">Page construite avec l’IA, selon la même méthode.</span><span class="en">Built with AI, using the same method.</span><span class="es">Página construida con IA, con el mismo método.</span></span>
+  </div>
+</footer>
+
+<dialog id="lb" aria-label="Capture">
+  <button type="button" id="lb-close"><span class="fr">Fermer ✕</span><span class="en">Close ✕</span><span class="es">Cerrar ✕</span></button>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</dialog>
+
+<script>
+(function(){
+  var body=document.body, root=document.documentElement;
+  function setLang(l){
+    body.dataset.lang=l; root.lang=l;
+    document.getElementById('lang-fr').setAttribute('aria-pressed', l==='fr');
+    document.getElementById('lang-en').setAttribute('aria-pressed', l==='en');
+    document.getElementById('lang-es').setAttribute('aria-pressed', l==='es');
+    document.querySelectorAll('img[data-alt-en]').forEach(function(im){
+      if(!im.dataset.altFr) im.dataset.altFr=im.alt;
+      im.alt = l==='en' ? im.dataset.altEn : l==='es' ? im.dataset.altEs : im.dataset.altFr;
+    });
+    try{localStorage.setItem('mi-lang',l)}catch(e){}
+  }
+  var start='fr';
+  try{ var sv=localStorage.getItem('mi-lang'); if(sv==='en'||sv==='es') start=sv; }catch(e){}
+  if(location.hash==='#es') start='es';
+  if(location.hash==='#en') start='en';
+  if(location.hash==='#fr') start='fr';
+  setLang(start);
+  document.getElementById('lang-fr').addEventListener('click',function(){setLang('fr')});
+  document.getElementById('lang-en').addEventListener('click',function(){setLang('en')});
+  document.getElementById('lang-es').addEventListener('click',function(){setLang('es')});
+
+  var copyBtn=document.getElementById('copy');
+  copyBtn.addEventListener('click',function(){
+    var t=document.getElementById('mail').textContent;
+    var done=function(){copyBtn.textContent= body.dataset.lang==='en'?'Copied ✓':body.dataset.lang==='es'?'Copiado ✓':'Copié ✓';setTimeout(function(){copyBtn.innerHTML='<span class="fr">Copier</span><span class="en">Copy</span><span class="es">Copiar</span>'},1600)};
+    var fallback=function(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r)};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fallback)}else{fallback()}
+  });
+
+  var lb=document.getElementById('lb'), lbImg=document.getElementById('lb-img'), lbCap=document.getElementById('lb-cap');
+  document.querySelectorAll('.shot').forEach(function(b){
+    b.addEventListener('click',function(){
+      var im=b.querySelector('img'); lbImg.src=im.src; lbImg.alt=im.alt;
+      lbCap.textContent = body.dataset.lang==='en' ? b.dataset.capEn : body.dataset.lang==='es' ? b.dataset.capEs : b.dataset.capFr;
+      if(lb.showModal) lb.showModal(); else lb.setAttribute('open','');
+    });
+  });
+  document.getElementById('lb-close').addEventListener('click',function(){lb.close()});
+  lb.addEventListener('click',function(e){ if(e.target===lb) lb.close(); });
+
+  // gentle parallax on the hero frames (transform only; content stays visible at rest)
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    var layers=[[document.querySelector('.stage .b1'),.06],[document.querySelector('.stage .b2'),.12],[document.querySelector('.stage .a1'),.18]];
+    var ticking=false;
+    addEventListener('scroll',function(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){
+      var y=Math.min(scrollY,700); layers.forEach(function(l){ if(l[0]) l[0].style.transform='translateY('+(-y*l[1])+'px)'; }); ticking=false; }); },{passive:true});
+  }
+})();
+</script>
+
+</body>
+</html>
