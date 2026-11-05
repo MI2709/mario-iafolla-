@@ -29,6 +29,23 @@
 .flow i{font-style:normal;text-align:center;color:#E2702A;font-weight:800;line-height:1}
 .agnote{font-size:12px;color:var(--muted);text-align:center;margin-top:2px}
 @media (max-width:560px){.agrow{grid-template-columns:1fr}}
+
+/* toc + tabs */
+.toc{margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px}
+.tochd{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tocgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 28px;margin-top:10px}
+.tocgrid b{display:block;color:var(--ink);font-size:14px;margin-bottom:4px}
+.tocgrid a{display:block;color:var(--body);text-decoration:none;font-size:14.5px;padding:3px 0}
+.tocgrid a:hover{color:#E2702A}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0 26px;position:sticky;top:calc(84px + env(safe-area-inset-top,0px));z-index:5}
+.tabs button{all:unset;box-sizing:border-box;cursor:pointer;text-align:left;padding:14px 20px;border-radius:18px;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border:1px solid var(--line);transition:.2s}
+.tabs button b{display:block;font-size:16px;color:var(--ink)}
+.tabs button small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink)}
+.tabs button[aria-selected="true"] b{color:#fff}.tabs button[aria-selected="true"] small{color:rgba(255,255,255,.7)}
+.tabs button:focus-visible{outline:3px solid #F59E3B;outline-offset:2px}
+.tabpane[hidden]{display:none}
+@media (max-width:720px){.tocgrid{grid-template-columns:1fr}.tabs{top:calc(74px + env(safe-area-inset-top,0px))}.tabs button{padding:11px 14px}.tabs button b{font-size:14.5px}.tabs button small{display:none}}
 </style>
 <title>Mario Iafolla</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -267,10 +284,28 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
       <div class="sechead">
         <span class="kicker"><span class="fr">Projets</span><span class="en">Projects</span><span class="es">Proyectos</span></span>
         <h2><span class="fr">Ce que j’ai construit</span><span class="en">What I’ve built</span><span class="es">Lo que he construido</span></h2>
-        <p><span class="fr">En entreprise d’abord, puis sur mon temps personnel. Chaque outil est en service.</span><span class="en">At work first, then in my own time. Every tool is in use.</span><span class="es">Primero en la empresa, después en mi tiempo personal. Todas las herramientas están en uso.</span></p>
+        <p><span class="fr">En entreprise d’abord, puis sur mon temps personnel. Chaque outil est en service : choisissez un onglet ou un projet dans le sommaire.</span><span class="en">At work first, then in my own time. Every tool is in use: pick a tab or a project from the contents.</span><span class="es">Primero en la empresa, después en mi tiempo personal. Todas las herramientas están en uso: elige una pestaña o un proyecto en el índice.</span></p>
       </div>
 
-      <div class="grouplabel"><span class="fr">En entreprise · Groupe Mauffrey</span><span class="en">At work · Mauffrey Group</span><span class="es">En la empresa · Grupo Mauffrey</span></div>
+      <nav class="toc" aria-label="Sommaire">
+        <span class="tochd"><span class="fr">Sommaire</span><span class="en">Contents</span><span class="es">Índice</span></span>
+        <div class="tocgrid">
+          <div><b><span class="fr">Projets professionnels</span><span class="en">Work projects</span><span class="es">Proyectos profesionales</span></b>
+            <a href="#cartographie" data-tab="pro"><span class="fr">Cartographie des flux</span><span class="en">Flow mapping tool</span><span class="es">Cartografía de flujos</span></a>
+            <a href="#groupe" data-tab="pro"><span class="fr">L’IA à l’échelle du groupe : agents, automatisations</span><span class="en">AI across the group: agents, automations</span><span class="es">La IA a escala del grupo: agentes, automatizaciones</span></a></div>
+          <div><b><span class="fr">Projets personnels</span><span class="en">Personal projects</span><span class="es">Proyectos personales</span></b>
+            <a href="#foyer" data-tab="perso"><span class="fr">Foyer : budget et patrimoine</span><span class="en">Foyer: budget and wealth</span><span class="es">Foyer: presupuesto y patrimonio</span></a>
+            <a href="#carnet" data-tab="perso"><span class="fr">Le Carnet : éducation financière</span><span class="en">Le Carnet: financial education</span><span class="es">Le Carnet: educación financiera</span></a></div>
+          <div><b><span class="fr">Et aussi</span><span class="en">Also</span><span class="es">Y también</span></b>
+            <a href="#methode"><span class="fr">Ma méthode</span><span class="en">How I work</span><span class="es">Cómo trabajo</span></a>
+            <a href="#contact"><span class="fr">Me contacter</span><span class="en">Get in touch</span><span class="es">Contacto</span></a></div>
+        </div>
+      </nav>
+      <div class="tabs" role="tablist" aria-label="Projets">
+        <button type="button" role="tab" id="tab-pro" aria-controls="pane-pro" aria-selected="true"><b><span class="fr">Projets professionnels</span><span class="en">Work projects</span><span class="es">Proyectos profesionales</span></b><small><span class="fr">En entreprise · Groupe Mauffrey</span><span class="en">At work · Mauffrey Group</span><span class="es">En la empresa · Grupo Mauffrey</span></small></button>
+        <button type="button" role="tab" id="tab-perso" aria-controls="pane-perso" aria-selected="false"><b><span class="fr">Projets personnels</span><span class="en">Personal projects</span><span class="es">Proyectos personales</span></b><small><span class="fr">Sur mon temps libre</span><span class="en">In my own time</span><span class="es">En mi tiempo libre</span></small></button>
+      </div>
+      <div class="tabpane" id="pane-pro" role="tabpanel" aria-labelledby="tab-pro">
 
       <!-- CARTOGRAPHIE -->
       <article class="card blue" id="cartographie">
@@ -368,7 +403,8 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
         </div>
       </article>
 
-      <div class="grouplabel"><span class="fr">Projets personnels</span><span class="en">Personal projects</span><span class="es">Proyectos personales</span></div>
+      </div>
+      <div class="tabpane" id="pane-perso" role="tabpanel" aria-labelledby="tab-perso" hidden>
 
       <!-- FOYER -->
       <article class="card mint" id="foyer">
@@ -436,6 +472,7 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
         </div>
       </article>
     </div>
+    </div>
   </section>
 
   <!-- METHODE -->
@@ -501,13 +538,29 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
   }
   var start='fr';
   try{ var sv=localStorage.getItem('mi-lang'); if(sv==='en'||sv==='es') start=sv; }catch(e){}
-  if(location.hash==='#es') start='es';
-  if(location.hash==='#en') start='en';
-  if(location.hash==='#fr') start='fr';
+  var htk=location.hash.slice(1).split(/[-&,]/);
+  if(htk.indexOf('es')>-1) start='es';
+  if(htk.indexOf('en')>-1) start='en';
+  if(htk.indexOf('fr')>-1) start='fr';
   setLang(start);
   document.getElementById('lang-fr').addEventListener('click',function(){setLang('fr')});
   document.getElementById('lang-en').addEventListener('click',function(){setLang('en')});
   document.getElementById('lang-es').addEventListener('click',function(){setLang('es')});
+  function showTab(t,scroll){
+    var pro=t!=='perso';
+    document.getElementById('pane-pro').hidden=!pro; document.getElementById('pane-perso').hidden=pro;
+    document.getElementById('tab-pro').setAttribute('aria-selected',pro); document.getElementById('tab-perso').setAttribute('aria-selected',!pro);
+    if(scroll){var tb=document.querySelector('.tabs'); window.scrollTo({top:tb.getBoundingClientRect().top+window.scrollY-90,behavior:'smooth'});}
+  }
+  document.getElementById('tab-pro').addEventListener('click',function(){showTab('pro',true)});
+  document.getElementById('tab-perso').addEventListener('click',function(){showTab('perso',true)});
+  document.querySelectorAll('a[data-tab]').forEach(function(a){a.addEventListener('click',function(e){
+    e.preventDefault(); showTab(a.dataset.tab,false);
+    var el=document.querySelector(a.getAttribute('href')); if(el) setTimeout(function(){window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-170,behavior:'smooth'})},30);
+  })});
+  var toks=location.hash.slice(1).split(/[-&,]/);
+  if(toks.indexOf('perso')>-1||['foyer','carnet'].indexOf(toks[0])>-1) showTab('perso',false);
+
 
   var copyBtn=document.getElementById('copy');
   copyBtn.addEventListener('click',function(){
