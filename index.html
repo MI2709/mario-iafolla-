@@ -31,7 +31,7 @@
 @media (max-width:560px){.agrow{grid-template-columns:1fr}}
 
 /* toc + tabs */
-.toc{margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px}
+.toc-x{margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px}
 .tochd{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .tocgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 28px;margin-top:10px}
 .tocgrid b{display:block;color:var(--ink);font-size:14px;margin-bottom:4px}
@@ -113,6 +113,46 @@ transition:transform .5s cubic-bezier(.3,1.35,.45,1),width .5s cubic-bezier(.3,1
 @media (max-width:520px){.dock a{min-width:0;padding:8px 11px;font-size:11px}}
 body{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 html{scroll-behavior:smooth}#methode,#contact{scroll-margin-top:84px}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;margin-top:30px}
+.tile{--mx:50%;--my:50%;position:relative;grid-column:span 2;min-height:300px;border-radius:26px;padding:22px 22px 0;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);overflow:hidden;isolation:isolate;border:1px solid rgba(19,32,42,.05);transition:transform .45s cubic-bezier(.2,.9,.3,1.2),box-shadow .45s}
+.tile.t-big{grid-column:span 3;min-height:360px}
+.tile.blue{background:var(--t-blue)}.tile.mint{background:var(--t-mint)}.tile.orange{background:var(--t-orange)}.tile.coral{background:var(--t-coral)}
+.tile::after{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(255,255,255,.9),transparent 45%)}
+.tile:hover{transform:translateY(-6px);box-shadow:0 30px 60px -28px rgba(19,32,42,.45)}
+.tile:hover::after{opacity:1}
+.tmeta{display:flex;align-items:center;gap:8px}
+.tkind{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tile .pill{font-size:12px;padding:4px 10px}
+.ttl{font-size:clamp(20px,2vw,26px);letter-spacing:-.02em;line-height:1.15;margin-top:12px}
+.hook{font-size:15px;color:var(--body);margin-top:6px;max-width:34ch}
+.tvis{position:relative;flex:1;margin-top:18px;min-height:120px}
+.tvis img{position:absolute;left:8%;right:-6%;bottom:-18px;width:92%;border-radius:14px 14px 0 0;box-shadow:0 20px 40px -18px rgba(19,32,42,.45);transform:rotate(-2deg) translateY(10px);transition:transform .6s cubic-bezier(.2,.9,.3,1.2)}
+.tile:not(.t-big) .tvis img{left:14%;width:80%}
+.tile.t-phone .tvis{min-height:150px}
+.tile.t-phone .tvis img{left:auto;right:10%;width:46%;bottom:-20px;border-radius:16px;transform:rotate(5deg) translateY(10px)}
+.tile:hover .tvis img{transform:rotate(0) translateY(2px) scale(1.02)}
+.tile .tgo{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;font-weight:700;opacity:0;transform:translate(-6px,6px) scale(.8);transition:.35s cubic-bezier(.2,.9,.3,1.3)}
+.tile:hover .tgo{opacity:1;transform:none}
+.chips{position:absolute;inset:auto 0 26px 0;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.chips span{background:#fff;border-radius:14px;padding:10px 14px;font-size:14px;font-weight:600;box-shadow:0 10px 24px -14px rgba(19,32,42,.4);transition:transform .5s cubic-bezier(.2,.9,.3,1.3)}
+.chips span:nth-child(2){margin-left:22px}.chips span:nth-child(3){margin-left:44px}
+.tile:hover .chips span{transform:translateX(8px)}.tile:hover .chips span:nth-child(2){transform:translateX(14px)}.tile:hover .chips span:nth-child(3){transform:translateX(20px)}
+@media (max-width:960px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}.tile,.tile.t-big{grid-column:span 1;min-height:300px}}
+@media (max-width:600px){.bento{grid-template-columns:1fr;gap:12px}.tile,.tile.t-big{min-height:270px}}
+
+/* reveal on scroll */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0) * 80ms)}
+.js .rv.in{opacity:1;transform:none}
+/* hero headline */
+.js .hero h1 .w{display:inline-block;opacity:0;transform:translateY(.5em) rotate(2deg);filter:blur(6px);animation:wIn .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--w) * 55ms + 150ms)}
+@keyframes wIn{to{opacity:1;transform:none;filter:none}}
+.hero h1 em{background-size:200% 100%;animation:shine 6s ease-in-out infinite}
+@keyframes shine{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+.hero h1 em{background-image:linear-gradient(90deg,var(--accent),#F2A23B,#E2702A,var(--accent))}
+.stage{transition:transform .2s ease-out;will-change:transform}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.js .hero h1 .w{animation:none;opacity:1;transform:none;filter:none}.hero h1 em{animation:none}.tile,.tvis img{transition:none}}
 /* hero */
 .hero{position:relative;padding-block:64px 40px;overflow:clip}
 html{overflow-x:clip}
@@ -257,6 +297,7 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
 .avatar.big{width:88px;height:88px;margin-bottom:22px;box-shadow:0 0 0 4px rgba(255,255,255,.15)}
 </style>
 
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 <div class="nav">
@@ -305,21 +346,13 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
         <p><span class="fr">Des outils en service ou en pilote, en entreprise puis sur mon temps libre.</span><span class="en">Tools in use or in pilot, at work and in my own time.</span><span class="es">Herramientas en uso o en piloto, en la empresa y en mi tiempo libre.</span></p>
       </div>
 
-      <nav class="toc" aria-label="Sommaire">
-        <span class="tochd"><span class="fr">Sommaire</span><span class="en">Contents</span><span class="es">Índice</span></span>
-        <div class="tocgrid">
-          <div><b><span class="fr">Projets professionnels</span><span class="en">Work projects</span><span class="es">Proyectos profesionales</span></b>
-            <a href="#cartographie"><span class="fr">Cartographie des flux</span><span class="en">Flow mapping tool</span><span class="es">Cartografía de flujos</span></a>
-            <a href="#ao-ligne"><span class="fr">AO ligne à ligne : chiffrage transport</span><span class="en">Line-by-line tender pricing</span><span class="es">Licitaciones línea a línea: cotización</span></a>
-            <a href="#groupe"><span class="fr">L’IA à l’échelle du groupe : agents, automatisations</span><span class="en">AI across the group: agents, automations</span><span class="es">La IA a escala del grupo: agentes, automatizaciones</span></a></div>
-          <div><b><span class="fr">Projets personnels</span><span class="en">Personal projects</span><span class="es">Proyectos personales</span></b>
-            <a href="#foyer"><span class="fr">Foyer : budget et patrimoine</span><span class="en">Foyer: budget and wealth</span><span class="es">Foyer: presupuesto y patrimonio</span></a>
-            <a href="#carnet"><span class="fr">Le Carnet : éducation financière</span><span class="en">Le Carnet: financial education</span><span class="es">Le Carnet: educación financiera</span></a></div>
-          <div><b><span class="fr">Et aussi</span><span class="en">Also</span><span class="es">Y también</span></b>
-            <a href="#methode"><span class="fr">Ma méthode</span><span class="en">How I work</span><span class="es">Cómo trabajo</span></a>
-            <a href="#contact"><span class="fr">Me contacter</span><span class="en">Get in touch</span><span class="es">Contacto</span></a></div>
-        </div>
-      </nav>
+      <div class="bento" aria-label="Projets">
+        <a class="tile blue t-big" href="#cartographie" style="--i:0"><span class="tmeta"><span class="tkind"><span class="fr">Pro</span><span class="en">Work</span><span class="es">Pro</span></span><span class="pill go"><span class="dot"></span><span class="fr">En production</span><span class="en">In production</span><span class="es">En producción</span></span></span><b class="ttl"><span class="fr">Cartographie des flux</span><span class="en">Flow mapping tool</span><span class="es">Cartografía de flujos</span></b><span class="hook"><span class="fr">Un fichier Excel devient une carte prête pour le client.</span><span class="en">An Excel file becomes a client-ready map.</span><span class="es">Un archivo Excel se convierte en un mapa listo para el cliente.</span></span><span class="tvis"><img src="img/carto_planche.webp" alt="" loading="lazy"></span><span class="tgo" aria-hidden="true">→</span></a>
+        <a class="tile mint t-big" href="#ao-ligne" style="--i:1"><span class="tmeta"><span class="tkind"><span class="fr">Pro</span><span class="en">Work</span><span class="es">Pro</span></span><span class="pill wip"><span class="dot"></span><span class="fr">Prêt pour le pilote</span><span class="en">Ready for pilot</span><span class="es">Listo para el piloto</span></span></span><b class="ttl"><span class="fr">AO ligne à ligne</span><span class="en">Line-by-line tender pricing</span><span class="es">Licitaciones línea a línea</span></b><span class="hook"><span class="fr">D’une grille client brute à une grille prête à coter.</span><span class="en">From a raw client grid to a grid ready to price.</span><span class="es">De una tabla bruta del cliente a una tabla lista para cotizar.</span></span><span class="tvis"><img src="img/aoll_synthese.webp" alt="" loading="lazy"></span><span class="tgo" aria-hidden="true">→</span></a>
+        <a class="tile orange" href="#groupe" style="--i:2"><span class="tmeta"><span class="tkind"><span class="fr">Pro</span><span class="en">Work</span><span class="es">Pro</span></span><span class="pill wip"><span class="dot"></span><span class="fr">En cours</span><span class="en">In progress</span><span class="es">En curso</span></span></span><b class="ttl"><span class="fr">L’IA à l’échelle du groupe</span><span class="en">AI across the group</span><span class="es">La IA a escala del grupo</span></b><span class="hook"><span class="fr">Des agents IA mis à disposition des équipes.</span><span class="en">AI agents made available to the teams.</span><span class="es">Agentes de IA a disposición de los equipos.</span></span><span class="tvis"><div class="chips"><span><span class="fr">Agent administratif</span><span class="en">Admin agent</span><span class="es">Agente administrativo</span></span><span><span class="fr">Contrôle des offres</span><span class="en">Bid review</span><span class="es">Control de ofertas</span></span><span><span class="fr">Automatisations</span><span class="en">Automations</span><span class="es">Automatizaciones</span></span></div></span><span class="tgo" aria-hidden="true">→</span></a>
+        <a class="tile mint t-phone" href="#foyer" style="--i:3"><span class="tmeta"><span class="tkind"><span class="fr">Perso</span><span class="en">Personal</span><span class="es">Personal</span></span><span class="pill go"><span class="dot"></span><span class="fr">En service</span><span class="en">In use</span><span class="es">En uso</span></span></span><b class="ttl"><span class="fr">Foyer</span><span class="en">Foyer</span><span class="es">Foyer</span></b><span class="hook"><span class="fr">Le budget et le patrimoine de ma famille, au quotidien.</span><span class="en">My family’s budget and wealth, day to day.</span><span class="es">El presupuesto y el patrimonio de mi familia, a diario.</span></span><span class="tvis"><img src="img/foyer_patrimoine.webp" alt="" loading="lazy"></span><span class="tgo" aria-hidden="true">→</span></a>
+        <a class="tile coral" href="#carnet" style="--i:4"><span class="tmeta"><span class="tkind"><span class="fr">Perso</span><span class="en">Personal</span><span class="es">Personal</span></span><span class="pill wip"><span class="dot"></span><span class="fr">Pré-lancement</span><span class="en">Pre-launch</span><span class="es">Prelanzamiento</span></span></span><b class="ttl"><span class="fr">Le Carnet</span><span class="en">Le Carnet</span><span class="es">Le Carnet</span></b><span class="hook"><span class="fr">Le cours d’argent qu’on ne t’a jamais donné.</span><span class="en">The money class you never got.</span><span class="es">La clase de dinero que nunca te dieron.</span></span><span class="tvis"><img src="img/carnet_home.webp" alt="" loading="lazy"></span><span class="tgo" aria-hidden="true">→</span></a>
+      </div>
       <div class="group" id="pane-pro">
         <div class="grouphd"><span class="gnum">01</span><div><h3><span class="fr">Projets professionnels</span><span class="en">Work projects</span><span class="es">Proyectos profesionales</span></h3><p><span class="fr">En entreprise · Groupe Mauffrey</span><span class="en">At work · Mauffrey Group</span><span class="es">En la empresa · Grupo Mauffrey</span></p></div></div>
 
@@ -604,6 +637,38 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
   document.getElementById('lang-fr').addEventListener('click',function(){setLang('fr')});
   document.getElementById('lang-en').addEventListener('click',function(){setLang('en')});
   document.getElementById('lang-es').addEventListener('click',function(){setLang('es')});
+  (function(){
+    var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // split hero headline into words
+    document.querySelectorAll('.hero h1 > span').forEach(function(sp){
+      var n=0;
+      (function walk(node){
+        Array.prototype.slice.call(node.childNodes).forEach(function(c){
+          if(c.nodeType===3){
+            var frag=document.createDocumentFragment();
+            c.textContent.split(/(\s+)/).forEach(function(t){ if(!t) return; if(/^\s+$/.test(t)){frag.appendChild(document.createTextNode(t));return;} var w=document.createElement('span'); w.className='w'; w.style.setProperty('--w',n++); w.textContent=t; frag.appendChild(w); });
+            node.replaceChild(frag,c);
+          } else if(c.nodeType===1 && c.tagName==='EM'){ c.classList.add('w'); c.style.setProperty('--w',n++); }
+          else if(c.nodeType===1) walk(c);
+        });
+      })(sp);
+    });
+    // reveal
+    var els=document.querySelectorAll('.tile,.card,.grouphd,.sechead,#methode .wrap > *,#contact .wrap > *');
+    els.forEach(function(e){e.classList.add('rv')});
+    if('IntersectionObserver' in window && !rm){
+      var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var t=en.target; t.classList.add('in'); io.unobserve(t); setTimeout(function(){t.classList.remove('rv','in')},1400+(parseInt(getComputedStyle(t).getPropertyValue('--i'))||0)*80)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+      els.forEach(function(e){io.observe(e)});
+    } else els.forEach(function(e){e.classList.add('in')});
+    // spotlight on tiles
+    document.querySelectorAll('.tile').forEach(function(t){t.addEventListener('pointermove',function(e){var r=t.getBoundingClientRect(); t.style.setProperty('--mx',(e.clientX-r.left)+'px'); t.style.setProperty('--my',(e.clientY-r.top)+'px');})});
+    // hero parallax
+    var st=document.querySelector('.stage');
+    if(st && !rm && window.matchMedia('(pointer:fine)').matches){
+      document.querySelector('.hero').addEventListener('pointermove',function(e){var x=e.clientX/window.innerWidth-.5,y=e.clientY/window.innerHeight-.5; st.style.transform='perspective(1200px) rotateY('+(x*6)+'deg) rotateX('+(-y*5)+'deg)';});
+      document.querySelector('.hero').addEventListener('pointerleave',function(){st.style.transform='';});
+    }
+  })();
   (function(){
     var dock=document.querySelector('.dock'), lens=dock.querySelector('.lens'), items={};
     dock.querySelectorAll('a').forEach(function(a){items[a.dataset.k]=a});
