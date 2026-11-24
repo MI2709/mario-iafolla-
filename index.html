@@ -90,6 +90,31 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .lang button:focus-visible{outline:3px solid var(--accent)}
 @media (max-width:720px){.links{display:none}}
 
+
+/* liquid glass dock */
+.dock{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;display:flex;gap:2px;padding:6px;border-radius:999px;isolation:isolate;
+background:linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,.26));
+-webkit-backdrop-filter:blur(20px) saturate(190%) contrast(1.05);backdrop-filter:blur(20px) saturate(190%) contrast(1.05);
+border:1px solid rgba(255,255,255,.65);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.3),inset 0 0 18px rgba(255,255,255,.35),0 0 0 .5px rgba(19,32,42,.10),0 16px 40px -14px rgba(19,32,42,.42),0 3px 8px rgba(19,32,42,.08)}
+.dock::before{content:"";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;z-index:-1;
+background:radial-gradient(120% 90% at 20% -10%,rgba(255,255,255,.75),rgba(255,255,255,0) 55%),radial-gradient(80% 120% at 100% 120%,rgba(255,255,255,.35),rgba(255,255,255,0) 60%)}
+.dock .lens{position:absolute;top:6px;bottom:6px;left:0;width:0;border-radius:999px;z-index:0;opacity:0;
+background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.6));
+box-shadow:inset 0 1px 0 #fff,inset 0 -2px 4px rgba(19,32,42,.06),0 6px 16px -6px rgba(19,32,42,.35),0 0 0 .5px rgba(19,32,42,.06);
+transition:transform .5s cubic-bezier(.3,1.35,.45,1),width .5s cubic-bezier(.3,1.35,.45,1),opacity .25s}
+.dock a{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:64px;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:600;line-height:1;color:var(--body);text-decoration:none;transition:color .2s,transform .2s}
+.dock a svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dock a:hover{color:var(--ink)}
+.dock a:active{transform:scale(.94)}
+.dock a.on{color:var(--ink)}
+.dock a.cta{color:var(--accent)}
+.dock a:focus-visible{outline:3px solid #F59E3B;outline-offset:1px}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.dock{background:rgba(255,255,255,.95)}}
+@media (prefers-reduced-motion:reduce){.dock .lens{transition:none}}
+@media (max-width:520px){.dock a{min-width:0;padding:8px 11px;font-size:11px}}
+body{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+html{scroll-behavior:smooth}#methode,#contact{scroll-margin-top:84px}
 /* hero */
 .hero{position:relative;padding-block:64px 40px;overflow:clip}
 html{overflow-x:clip}
@@ -240,11 +265,6 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
   <div class="wrap">
     <div class="navin">
       <a class="brand" href="#top">Mario Iafolla</a>
-      <nav class="links" aria-label="Sections">
-        <a href="#projets"><span class="fr">Projets</span><span class="en">Projects</span><span class="es">Proyectos</span></a>
-        <a href="#methode"><span class="fr">Méthode</span><span class="en">How I work</span><span class="es">Cómo trabajo</span></a>
-        <a href="#contact">Contact</a>
-      </nav>
       <div class="lang" role="group" aria-label="Langue / Language">
         <button type="button" id="lang-fr" aria-pressed="true">FR</button>
         <button type="button" id="lang-en" aria-pressed="false">EN</button>
@@ -550,6 +570,14 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
   </div>
 </footer>
 
+<nav class="dock" aria-label="Navigation">
+  <span class="lens" aria-hidden="true"></span>
+  <a href="#projets" data-k="pro"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18"/></svg><span class="fr">Pro</span><span class="en">Work</span><span class="es">Pro</span></a>
+  <a href="#projets" data-k="perso"><svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 4.6 4.9.4-3.7 3.2 1.1 4.8L12 14l-4.2 2.5 1.1-4.8-3.7-3.2 4.9-.4z"/><path d="M5 20h14"/></svg><span class="fr">Perso</span><span class="en">Personal</span><span class="es">Personal</span></a>
+  <a href="#methode" data-k="methode"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span class="fr">Méthode</span><span class="en">Method</span><span class="es">Método</span></a>
+  <a href="#contact" data-k="contact" class="cta"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg><span class="fr">Contact</span><span class="en">Contact</span><span class="es">Contacto</span></a>
+</nav>
+
 <dialog id="lb" aria-label="Capture">
   <button type="button" id="lb-close"><span class="fr">Fermer ✕</span><span class="en">Close ✕</span><span class="es">Cerrar ✕</span></button>
   <img id="lb-img" alt="">
@@ -592,6 +620,29 @@ dialog p{color:#E6ECEF;font-size:14px;margin-top:10px;text-align:center}
     e.preventDefault(); showTab(a.dataset.tab,false);
     var el=document.querySelector(a.getAttribute('href')); if(el) setTimeout(function(){window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-170,behavior:'smooth'})},30);
   })});
+  (function(){
+    var dock=document.querySelector('.dock'), lens=dock.querySelector('.lens'), items={};
+    dock.querySelectorAll('a').forEach(function(a){items[a.dataset.k]=a});
+    function place(k){
+      Object.keys(items).forEach(function(n){items[n].classList.toggle('on',n===k); if(n===k) items[n].setAttribute('aria-current','true'); else items[n].removeAttribute('aria-current');});
+      var a=items[k]; if(!a){lens.style.opacity=0;return;}
+      lens.style.opacity=1; lens.style.width=a.offsetWidth+'px'; lens.style.transform='translateX('+a.offsetLeft+'px)';
+    }
+    function current(){
+      if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) return 'contact';
+      var y=window.innerHeight*0.45, found=null;
+      ['contact','methode','projets'].some(function(id){var el=document.getElementById(id); if(!el) return false; var r=el.getBoundingClientRect(); if(r.top<y&&r.bottom>0){found=id;return true} return false;});
+      if(found==='projets') return document.getElementById('pane-perso').hidden?'pro':'perso';
+      return found;
+    }
+    var tick=false; function upd(){ if(tick) return; tick=true; requestAnimationFrame(function(){tick=false; place(current());}); }
+    window.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd);
+    ['tab-pro','tab-perso','lang-fr','lang-en','lang-es'].forEach(function(id){document.getElementById(id).addEventListener('click',function(){setTimeout(function(){place(current())},20)})});
+    document.querySelectorAll('a[data-tab]').forEach(function(a){a.addEventListener('click',function(){setTimeout(upd,60)})});
+    ['pro','perso'].forEach(function(k){items[k].addEventListener('click',function(e){e.preventDefault(); showTab(k,true); place(k);})});
+    if(document.fonts&&document.fonts.ready) document.fonts.ready.then(upd);
+    upd();
+  })();
   var toks=location.hash.slice(1).split(/[-&,]/);
   if(toks.indexOf('perso')>-1||['foyer','carnet'].indexOf(toks[0])>-1) showTab('perso',false);
 
